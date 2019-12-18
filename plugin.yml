@@ -1,0 +1,8 @@
+name: PersistentItems
+main: net.thedudemc.persistent.Persistent
+version: 1.0
+api-version: 1.14
+commands:
+  tag:
+    description: Add tag to the item in hand.
+    usage: /tag <tagName>
