@@ -27,29 +27,38 @@ public class Commands implements CommandExecutor {
 
 	@Override
 	public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
+
 		if (!sender.isOp()) {
 			sender.sendMessage(ChatColor.RED + "You do not have permission to use this command!");
+			return true;
 		}
-		if (sender instanceof Player) {
-			Player player = (Player) sender;
-			if (args.length == 1) {
-				String tag = args[0];
-				org.bukkit.inventory.ItemStack inHand = player.getInventory().getItemInMainHand();
-				if (inHand != null && inHand.getType() != Material.AIR) {
-					ItemStack stack = CraftItemStack.asNMSCopy(inHand);
-					NBTTagCompound nbt = stack.getOrCreateTag();
-					nbt.setBoolean(tag, true);
-					stack.setTag(nbt);
-					player.getInventory().setItemInMainHand(CraftItemStack.asBukkitCopy(stack));
-					player.updateInventory();
-					player.sendMessage(ChatColor.LIGHT_PURPLE + inHand.getType().name() + ChatColor.RESET + " has been given the " + ChatColor.YELLOW + tag + ChatColor.RESET + " tag!");
-				}
-			} else {
-				return false;
-			}
-		} else {
+
+		if (!(sender instanceof Player)) {
 			sender.sendMessage(ChatColor.RED + "This command may only be run by a player in game.");
+			return true;
 		}
+
+		Player player = (Player) sender;
+		
+		if (args.length != 1) return false;
+
+		String tag = args[0];
+
+		org.bukkit.inventory.ItemStack inHand = player.getInventory().getItemInMainHand();
+
+		if (inHand == null || inHand.getType() == Material.AIR)
+			return true;
+
+		ItemStack stack = CraftItemStack.asNMSCopy(inHand);
+		NBTTagCompound nbt = stack.getOrCreateTag();
+		nbt.setBoolean(tag, true);
+		stack.setTag(nbt);
+		player.getInventory().setItemInMainHand(CraftItemStack.asBukkitCopy(stack));
+		player.updateInventory();
+		player.sendMessage(ChatColor.LIGHT_PURPLE + inHand.getType().name() + 
+						   ChatColor.RESET + " has been given the " + 
+						   ChatColor.YELLOW + tag + 
+						   ChatColor.RESET + " tag!");
 		return true;
 	}
 
