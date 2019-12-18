@@ -4,10 +4,10 @@ import java.io.File;
 
 import org.bukkit.plugin.java.JavaPlugin;
 
+import net.thedudemc.persistent.command.Commands;
+import net.thedudemc.persistent.config.Config;
 import net.thedudemc.persistent.data.SaveData;
 import net.thedudemc.persistent.event.EventPersistItems;
-import net.thedudemc.persistent.util.Commands;
-import net.thedudemc.persistent.util.Config;
 
 public class Persistent extends JavaPlugin {
 

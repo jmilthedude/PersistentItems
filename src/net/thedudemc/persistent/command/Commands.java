@@ -1,4 +1,4 @@
-package net.thedudemc.persistent.util;
+package net.thedudemc.persistent.command;
 
 import org.bukkit.ChatColor;
 import org.bukkit.Material;

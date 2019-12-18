@@ -1,4 +1,4 @@
-package net.thedudemc.persistent.util;
+package net.thedudemc.persistent.config;
 
 import java.util.ArrayList;
 import java.util.List;
